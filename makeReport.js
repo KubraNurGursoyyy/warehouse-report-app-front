@@ -1,17 +1,19 @@
 const api_url =
-    "http://localhost:3000/api/report";
+    "http://localhost:4000/api/report";
 
 async function getapi(url) {
 
     const response = await fetch(url);
-
     var data = await response.json();
+
     console.log(data);
     show(data);
 }
 getapi(api_url);
 
 function show(data) {
+    console.log(data);
+
     let tab =
         `<tr>
 		<th>Warehouse Name</th>
@@ -35,6 +37,6 @@ function show(data) {
 </tr>`;
     });
 
-    document.getElementById("report").innerHTML = tab;
+    document.getElementById("reportTable").innerHTML = tab;
 }
 
