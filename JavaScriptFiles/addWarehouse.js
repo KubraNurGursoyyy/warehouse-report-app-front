@@ -3,7 +3,7 @@ const api_post_url =
 
 let _data;
 
-async function postApi(url) {
+async function postWarehousesApi(url) {
 
     console.log("Data:" , _data);
 
@@ -11,15 +11,14 @@ async function postApi(url) {
     let options = {
         method: "POST",
         body: _data,
-        mode: 'no-cors',
         headers: {
-            "Content-type": "application/json; charset=UTF-8"
+            "Content-type": "application/json; charset=UTF-8",
+            "Access-Control-Allow-Origin": "http://localhost:4000/api/warehouses/"
         }}
     console.log("options:", options);
     console.log("body:" , options.body);
 
     const response = await fetch(url,options)
-    console.log("Response:", response )
 
 }
 function getFormData($form){
@@ -32,8 +31,6 @@ function getFormData($form){
 }
 
 function postWarehouses(){
-    let formData = document.getElementById("warehouseForm")
-
     $("#warehouseForm").submit(function() {
         console.log("Submit", $(this).formToJson());
         return false;
@@ -44,7 +41,7 @@ function postWarehouses(){
     _data = JSON.stringify($("#warehouseForm").formToJson())
     console.log("_data nın json hali ", JSON.stringify($("#warehouseForm").formToJson()))
 
-    postApi(api_post_url);
+    postWarehousesApi(api_post_url);
 }
 /*
 document.getElementById('submitWarehouses').addEventListener('click', async _ => {
