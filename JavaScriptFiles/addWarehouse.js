@@ -1,5 +1,5 @@
 const api_post_url =
-    "http://localhost:3000/api/warehouses/";
+    "https://jr-test-case-backend.herokuapp.com/api/warehouses/";
 
 let _data;
 
@@ -13,7 +13,7 @@ async function postWarehousesApi(url) {
         body: _data,
         headers: {
             "Content-type": "application/json; charset=UTF-8",
-            "Access-Control-Allow-Origin": "http://localhost:4000/api/warehouses/"
+            "Access-Control-Allow-Origin": "https://jr-test-case-backend.herokuapp.com/api/warehouses/"
         }}
     console.log("options:", options);
     console.log("body:" , options.body);
@@ -43,17 +43,4 @@ function postWarehouses(){
 
     postWarehousesApi(api_post_url);
 }
-/*
-document.getElementById('submitWarehouses').addEventListener('click', async _ => {
-    try {
-        _data = document.getElementById("warehouseDiv")
-        let name = _data;
-        console.log('Naamr: ' + name)
-        console.log('_DATA:' + _data)
-        postApi(api_post_url);
-    } catch(err) {
-        console.error(`Error: ${err}`);
-    }
-});*/
-
 

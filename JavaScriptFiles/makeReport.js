@@ -1,5 +1,5 @@
 const api_url =
-    "http://localhost:3000/api/report";
+    "https://jr-test-case-backend.herokuapp.com/api/report";
 
 async function getapi() {
 
