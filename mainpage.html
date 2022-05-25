@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Warehouse Report</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <script src="JSDirectory/jquery.js"></script>
+
+    <script src="JSDirectory/formToJson.js"></script>
+    <script src="JSDirectory/formToJson.min.js"></script>
+
+
+    <script src="JavaScriptFiles/makeReport.js"></script>
+    <script src="JavaScriptFiles/addWarehouse.js"></script>
+    <script src="JavaScriptFiles/addProducts.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body style="font-family:'Courier New';text-align: center">
+<div class="container" style="padding: 20px">
+    <h2>Welcome</h2>
+    <h3>Select Action</h3>
+    <br>
+    <div >
+    <button style="background:#d5e1df" type="button" onclick="display('reportTable'); getapi()"><h3>Make Report</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('warehouseForm')"><h3>Add Warehouse</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('productForm'); getWarehousesApi()"><h3>Add Product</h3></button>
+    </div>
+    <br>
+    <br>
+
+    <div style="font-size: 15px">
+    <table style="background: white" class="table table-hover" id="reportTable" style="display: none"></table>
+
+    <form action="#" name ="warehouseForm" id="warehouseForm" method="post" style="display: none">
+        <label for="name" >Warehouse Name</label><br>
+        <input type="text" required id="name" name="name"><br><br>
+        <input style="background:#d5e1df" type="submit" value="Add" onClick="postWarehouses()">
+    </form>
+
+    <form action="#" name ="productForm" id="productForm" method="post" style="display: none">
+        <label for="products" >Product Name</label><br>
+        <input type="text" id="products" name="products" required><br><br>
+
+        <label for="quantity" >Quantity</label><br>
+        <input type="text" required onkeypress="return /[0-9]/i.test(event.key)" id="quantity" name="quantity"><br><br>
+
+        <label for="purchasePrice" >Purchase Price</label><br>
+        <input type="text" required onkeypress="return /[0-9]/i.test(event.key)"  id="purchasePrice" name="purchasePrice"><br><br>
+
+        <label for="purchasePriceWithVat" >Purchase Price With Vat</label><br>
+        <input type="text" required onkeypress="return /[0-9]/i.test(event.key)"  id="purchasePriceWithVat" name="purchasePriceWithVat"><br><br>
+
+        <label for="salePrice" >Sale Price</label><br>
+        <input type="text" required onkeypress="return /[0-9]/i.test(event.key)"  id="salePrice" name="salePrice"><br><br>
+
+        <label for="salePriceWithVat" >Sale Price With Vat</label><br>
+        <input type="text" required onkeypress="return /[0-9]/i.test(event.key)"  id="salePriceWithVat" name="salePriceWithVat"><br><br>
+
+        <label for="warehouseId">Select Warehouse</label><br>
+        <select  style="background:#d5e1df; border:outset 2px #e4e4e4" id="warehouseId" name="warehouseId"></select><br><br>
+
+        <input style="background:#d5e1df" type="submit" value="Add" onClick="postProducts()">
+    </form>
+    </div>
+
+</div>
+</body>
+<script>
+    function display(elementID) {
+        var element = document.getElementById(elementID);
+        if (element.style.display === "none") {
+            $('table').hide();
+            $('form').hide();
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+</script>
+</html>
