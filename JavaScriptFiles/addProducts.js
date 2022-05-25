@@ -1,5 +1,5 @@
 const api_post_products_url =
-    "https://jr-test-case-backend.herokuapp.com/api/products/";
+    "https://warehouse-report-app-backend.herokuapp.com/api/products/";
 
 let _wdata;
 let warehouses;
@@ -37,7 +37,7 @@ async function postProductsApi(url) {
         body: _wdata,
         headers: {
             "Content-type": "application/json; charset=UTF-8",
-            "Access-Control-Allow-Origin": "https://jr-test-case-backend.herokuapp.com/api/products/"
+            "Access-Control-Allow-Origin": "https://warehouse-report-app-backend.herokuapp.com/api/products/"
         }}
     const response = await fetch(url,options)
 }
