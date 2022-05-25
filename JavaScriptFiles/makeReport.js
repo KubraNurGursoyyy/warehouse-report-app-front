@@ -24,19 +24,6 @@ function show(data) {
 		<th>Total Product Value By Purchase Price With VAT</th>
 		<th>Total Product Value By Sale Price With VAT</th>
 		</tr>`;
-    /*
-       for(let i = 0; i == data.length; i++){
-           tab += `<tr>
-       <td>${data[i].warehouseName} </td>
-       <td>${data[i].totalRangeOfProducts}</td>
-       <td>${data[i].totalProductQuantity}</td>
-       <td>${data[i].totalProductValueByPurchasePrice}</td>
-       <td>${data[i].totalProductValueBySalePrice}</td>
-       <td>${data[i].totalProductValueByPurchasePriceWithVAT}</td>
-       <td>${data[i].totalProduclueBySalePriceWithVAT}</td>
-   </tr>`
-       }*/
-
        data.forEach(r => {
            tab += `<tr>
        <td>${r.warehouseName} </td>
