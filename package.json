@@ -1,5 +1,13 @@
 {
+  "name": "Warehouse-Report-App",
+  "version": "1.0.0",
+  "description": "Warehouse-Report-App",
+  "scripts": {
+    "start": "serve"
+  },
+  "author": "KubraNurGursoyyy",
   "dependencies": {
+    "serve": "^10.0.1",
     "cors": "^2.8.5",
     "jquery": "^3.6.0"
   }
