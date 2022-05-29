@@ -1,5 +1,5 @@
 const api_post_url =
-    "https://warehouse-report-app-backend.herokuapp.com/api/warehouses/";
+    "http://warehouse-report-app-backend.herokuapp.com/api/warehouses/";
 
 let _data;
 
@@ -13,7 +13,7 @@ async function postWarehousesApi(url) {
         body: _data,
         headers: {
             "Content-type": "application/json; charset=UTF-8",
-            "Access-Control-Allow-Origin": "https://warehouse-report-app-backend.herokuapp.com/api/warehouses/"
+            "Access-Control-Allow-Origin": "http://warehouse-report-app-backend.herokuapp.com/api/warehouses/"
         }}
     console.log("options:", options);
     console.log("body:" , options.body);

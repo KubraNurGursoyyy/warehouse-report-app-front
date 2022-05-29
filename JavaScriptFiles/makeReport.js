@@ -1,5 +1,5 @@
 const api_url =
-    "https://warehouse-report-app-backend.herokuapp.com/api/report";
+    "http://warehouse-report-app-backend.herokuapp.com/api/report";
 
 
 async function getapi() {
