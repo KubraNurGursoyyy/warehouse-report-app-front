@@ -1,10 +1,12 @@
 const api_url =
-    "https://warehouse-report-app-backend.herokuapp.com:8080/api/report";
+    "https://warehouse-report-app-backend.herokuapp.com/api/report";
 
 
 async function getapi() {
 
-    const response = await fetch(api_url);
+    const response = await fetch(api_url,{
+        mode: 'no-cors'
+    });
     var data = await response.json();
 
     console.log("W Data",data);
