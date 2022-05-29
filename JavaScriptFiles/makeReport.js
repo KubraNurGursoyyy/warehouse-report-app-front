@@ -1,6 +1,7 @@
 const api_url =
     "https://warehouse-report-app-backend.herokuapp.com:8080/api/report";
 
+
 async function getapi() {
 
     const response = await fetch(api_url);
