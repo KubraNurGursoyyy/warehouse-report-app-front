@@ -39,6 +39,8 @@ async function postProductsApi(url) {
     console.log("options:", options);
     console.log("body:" , options.body);
     const response = await fetch(url,options)
+    alert("Product Added")
+
 }
 
 

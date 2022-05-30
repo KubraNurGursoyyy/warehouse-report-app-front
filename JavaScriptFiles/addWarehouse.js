@@ -17,6 +17,7 @@ async function postWarehousesApi(url) {
 
     const response = await fetch(url,options)
 
+    alert("Warehouse Added")
 }
 function getFormData($form){
     var unindexed_array = $form.serializeArray();
