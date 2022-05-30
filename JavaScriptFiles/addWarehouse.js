@@ -5,9 +5,6 @@ let _data;
 
 async function postWarehousesApi(url) {
 
-    console.log("Data:" , _data);
-
-    console.log("Body olacak şey:" , JSON.stringify(_data))
     let options = {
         method: "POST",
         body: _data,

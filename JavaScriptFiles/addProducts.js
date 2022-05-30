@@ -38,7 +38,9 @@ async function postProductsApi(url) {
         headers: {
             "Content-type": "application/json; charset=UTF-8",
             "Access-Control-Allow-Origin": "https://warehouse-report-app-backend.herokuapp.com/api/products/"
-        }}
+        }};
+    console.log("options:", options);
+    console.log("body:" , options.body);
     const response = await fetch(url,options)
 }
 
