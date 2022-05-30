@@ -1,4 +1,4 @@
-const api_post_url =
+const warehouses_api_url =
     "https://warehouse-report-app-backend.herokuapp.com/api/warehouses/";
 
 let _data;
@@ -39,6 +39,6 @@ function postWarehouses(){
     _data = JSON.stringify($("#warehouseForm").formToJson())
     console.log("_data nın json hali ", JSON.stringify($("#warehouseForm").formToJson()))
 
-    postWarehousesApi(api_post_url);
+    postWarehousesApi(warehouses_api_url);
 }
 

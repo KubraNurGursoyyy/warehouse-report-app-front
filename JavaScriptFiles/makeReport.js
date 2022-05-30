@@ -1,17 +1,17 @@
-const api_url =
+const report_api_url =
     "https://warehouse-report-app-backend.herokuapp.com/api/report";
 
 
-async function getapi() {
+async function getReportApi() {
 
-    const response = await fetch(api_url);
+    const response = await fetch(report_api_url);
     var data = await response.json();
-    show(data);
+    renderReport(data);
 
 }
-getapi();
+getReportApi();
 
-function show(data) {
+function renderReport(data) {
     console.log(data);
 
     let tab =
