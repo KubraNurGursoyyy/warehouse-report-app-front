@@ -1,19 +1,19 @@
-const products_api_url =
+const api_post_products_url =
     "https://warehouse-report-app-backend.herokuapp.com/api/products/";
 
 let _wdata;
 let warehouses;
 async function getWarehousesApi() {
 
-    const response = await fetch(warehouses_api_url);
+    const response = await fetch(api_post_url);
     var data = await response.json();
     warehouses = data;
 
     console.log("Warehouses", warehouses);
-    renderOptions(data);
+    render(data);
 }
 
-function renderOptions(data) {
+function render(data) {
     console.log("Data: " ,data);
     let tab =``;
     for(let r = 0; r < data.length; r++){
@@ -55,6 +55,6 @@ function postProducts(){
     _wdata = JSON.stringify($("#productForm").formToJson())
     console.log("_data nın json hali ", JSON.stringify($("#productForm").formToJson()))
 
-    postProductsApi(products_api_url);
+    postProductsApi(api_post_products_url);
 }
 

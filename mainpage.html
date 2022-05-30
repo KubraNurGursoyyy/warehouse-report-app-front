@@ -29,7 +29,7 @@
     <h3>Select Action</h3>
     <br>
     <div >
-    <button style="background:#d5e1df" type="button" onclick="display('reportTable'); getReportApi()"><h3>Make Report</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('reportTable'); getapi()"><h3>Make Report</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('warehouseForm')"><h3>Add Warehouse</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('productForm'); getWarehousesApi()"><h3>Add Product</h3></button>
     </div>
@@ -86,8 +86,13 @@
     }
     function isNumberKey(txt, evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode === 46) {
-            return txt.value.indexOf('.') === -1;
+        if (charCode == 46) {
+            //Check if the text already contains the . character
+            if (txt.value.indexOf('.') === -1) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             if (charCode > 31 &&
                 (charCode < 48 || charCode > 57))
