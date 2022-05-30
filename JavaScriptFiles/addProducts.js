@@ -1,5 +1,5 @@
 const api_post_products_url =
-    "http://warehouse-report-app-backend.herokuapp.com/api/products/";
+    "https://warehouse-report-app-backend.herokuapp.com/api/products/";
 
 let _wdata;
 let warehouses;
@@ -22,10 +22,7 @@ function render(data) {
         else
             tab += `<option value="${data[r].id}">${data[r].name}</option>`;
 
-    }/*
-    data.forEach(r => {
-        tab += `<option value="${r.id}">${r.name}</option>`;
-    });*/
+    }
     console.log(tab)
     document.getElementById("warehouseId").innerHTML = tab;
 }
