@@ -4,13 +4,10 @@ const api_url =
 
 async function getapi() {
 
-    const response = await fetch(api_url,{
-        mode: 'no-cors'
-    });
+    const response = await fetch(api_url);
     var data = await response.json();
-
-    console.log("W Data",data);
     show(data);
+
 }
 getapi();
 
