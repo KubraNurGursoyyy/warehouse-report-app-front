@@ -39,14 +39,15 @@ async function postProductsApi(url) {
     console.log("options:", options);
     console.log("body:" , options.body);
     const response = await fetch(url,options)
-    alert("Product Added")
+    alert("Product Added");
+    $("#productForm")[0].reset();
+
 
 }
 
 
 function postProducts(){
     console.log("Form:", $("#productForm"));
-    console.log("All:", $("#allProductForm"));
 
     $("#productForm").submit(function() {
         console.log("Submit", $(this).formToJson());
