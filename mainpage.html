@@ -20,6 +20,8 @@
     <script src="./JavaScriptFiles/addWarehouse.js"></script>
     <script src="./JavaScriptFiles/addProducts.js"></script>
     <script src="./JavaScriptFiles/VatRateCalculate.js"></script>
+    <script src="./JavaScriptFiles/listProducts.js"></script>
+
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,6 +36,7 @@
     <button style="background:#d5e1df" id="makeReportButton" type="button" onclick="display('reportTable'); getapi()"><h3>Make Report</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('warehouseForm')"><h3>Add Warehouse</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('productsDiv'); getWarehousesApi(); getVatRate()"><h3>Add Product</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('productsTable'); getProductsApi()"><h3>List Products</h3></button>
     </div>
     <br>
     <br>
@@ -41,7 +44,10 @@
     <div style="font-size: 15px">
     <table style="background: white" class="table table-hover" id="reportTable" style="display: none"></table>
 
-    <form action="#" name ="warehouseForm" id="warehouseForm" method="post" style="display: none">
+    <table style="background: white" class="table table-hover" id="productsTable" style="display: none"></table>
+
+
+        <form action="#" name ="warehouseForm" id="warehouseForm" method="post" style="display: none">
         <label for="name" >Warehouse Name</label><br>
         <input type="text" required id="name" name="name"><br><br>
         <input style="background:#d5e1df" type="submit" value="Add" onClick="postWarehouses(); goToMakeReport()">
@@ -91,8 +97,6 @@
         $('#warehouseForm')[0].reset();
         $('#productForm')[0].reset();
 
-        console.log($('#warehouseForm'));
-        console.log($("form")[0])
         if (element.style.display === "none") {
             $('table').hide();
             $('#warehouseForm').hide();
@@ -123,6 +127,7 @@
     function goToMakeReport(){
         document.getElementById('makeReportButton').click();
         getapi();
+        getProductsApi()
         }
 </script>
 </html>
