@@ -33,21 +33,29 @@
     <h3>Select Action</h3>
     <br>
     <div >
-    <button style="background:#d5e1df" id="makeReportButton" type="button" onclick="display('reportTable'); getapi()"><h3>Make Report</h3></button>
+    <button style="background:#d5e1df" id="makeReportButton" type="button" onclick="display('reportDiv'); getapi()"><h3>Make Report</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('warehouseForm')"><h3>Add Warehouse</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('productsDiv'); getWarehousesApi(); getVatRate()"><h3>Add Product</h3></button>
-    <button style="background:#d5e1df" type="button" onclick="display('productsTable'); getProductsApi()"><h3>List Products</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('productsListDiv'); getProductsApi(); getOptWarehouses()"><h3>List Products</h3></button>
     </div>
     <br>
     <br>
 
     <div style="font-size: 15px">
-    <table style="background: white" class="table table-hover" id="reportTable" style="display: none"></table>
+        <div id="reportDiv">
+            <table style="background: white" class="table table-hover" id="reportTable"></table>
 
-    <table style="background: white" class="table table-hover" id="productsTable" style="display: none"></table>
+        </div>
+        <div id="productsListDiv" style="display: none">
+            <label for="warehousename">Select Warehouse If You Want To Filter</label><br>
+            <select  style="background:#d5e1df; border:outset 2px #e4e4e4" id="warehousename" name="warehousename"></select><br><br>
+            <input style="background:#d5e1df" type="submit" value="Add" onClick="filterByWarehouse();">
+            <table style="background: white" class="table table-hover" id="productsTable"></table>
+
+        </div>
 
 
-        <form action="#" name ="warehouseForm" id="warehouseForm" method="post" style="display: none">
+    <form action="#" name ="warehouseForm" id="warehouseForm" method="post" style="display: none">
         <label for="name" >Warehouse Name</label><br>
         <input type="text" required id="name" name="name"><br><br>
         <input style="background:#d5e1df" type="submit" value="Add" onClick="postWarehouses(); goToMakeReport()">
@@ -98,7 +106,8 @@
         $('#productForm')[0].reset();
 
         if (element.style.display === "none") {
-            $('table').hide();
+            $('#reportDiv').hide();
+            $('#productsListDiv').hide();
             $('#warehouseForm').hide();
             $('#productsDiv').hide();
 
@@ -127,7 +136,7 @@
     function goToMakeReport(){
         document.getElementById('makeReportButton').click();
         getapi();
-        getProductsApi()
+        getProductsApi();
         }
 </script>
 </html>

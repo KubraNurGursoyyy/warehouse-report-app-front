@@ -39,7 +39,6 @@ function changeInPrice(event){
 
 function findVatRate(price,priceWithVat){
     var FindingVat = ((priceWithVat - price) * 100) / price;
-    console.log("Finding Vat Rate: " , FindingVat);
     return FindingVat;
 }
 
