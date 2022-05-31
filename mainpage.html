@@ -19,6 +19,8 @@
     <script src="./JavaScriptFiles/makeReport.js"></script>
     <script src="./JavaScriptFiles/addWarehouse.js"></script>
     <script src="./JavaScriptFiles/addProducts.js"></script>
+    <script src="./JavaScriptFiles/VatRateCalculate.js"></script>
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -31,7 +33,7 @@
     <div >
     <button style="background:#d5e1df" type="button" onclick="display('reportTable'); getapi()"><h3>Make Report</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('warehouseForm')"><h3>Add Warehouse</h3></button>
-    <button style="background:#d5e1df" type="button" onclick="display('productForm'); getWarehousesApi()"><h3>Add Product</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('productsDiv'); getWarehousesApi(); getVatRate()"><h3>Add Product</h3></button>
     </div>
     <br>
     <br>
@@ -45,7 +47,16 @@
         <input style="background:#d5e1df" type="submit" value="Add" onClick="postWarehouses()">
     </form>
 
-    <form action="#" name ="productForm" id="productForm" method="post" style="display: none">
+    <div name="productsDiv" id="productsDiv" style="display: none">
+        <label for="vatRate">Vat Rate For Product</label><br>
+        <select  style="background:#d5e1df; border:outset 2px #e4e4e4" id="vatRate" name="vatRate" onchange="getVatRate()">
+            <option selected value ="0">% 0</option>
+            <option value ="1">% 1</option>
+            <option value ="8">% 8</option>
+            <option value ="18">% 18</option>
+        </select><br><br>
+
+    <form action="#" name ="productForm" id="productForm" method="post">
         <label for="products" >Product Name</label><br>
         <input type="text" id="products" name="products" required><br><br>
 
@@ -53,22 +64,23 @@
         <input type="text" required onkeypress="return /[0-9]/i.test(event.key)" id="quantity" name="quantity"><br><br>
 
         <label for="purchasePrice" >Purchase Price</label><br>
-        <input type="text" required onkeypress="return isNumberKey(this, event)"  id="purchasePrice" name="purchasePrice"><br><br>
+        <input type="text" required onkeypress="return isNumberKey(this, event)" onkeyup="changeInPrice(this.id)" id="purchasePrice" name="purchasePrice"><br><br>
 
         <label for="purchasePriceWithVat" >Purchase Price With Vat</label><br>
-        <input type="text" required onkeypress="return isNumberKey(this, event)"  id="purchasePriceWithVat" name="purchasePriceWithVat"><br><br>
+        <input type="text" required onkeypress="return isNumberKey(this, event)" onkeyup="changeInPriceWithVatRate(this.id)" id="purchasePriceWithVat" name="purchasePriceWithVat"><br><br>
 
         <label for="salePrice" >Sale Price</label><br>
-        <input type="text" required onkeypress="return isNumberKey(this, event)"  id="salePrice" name="salePrice"><br><br>
+        <input type="text" required onkeypress="return isNumberKey(this, event)" onkeyup="changeInPrice(this.id)" id="salePrice" name="salePrice"><br><br>
 
         <label for="salePriceWithVat" >Sale Price With Vat</label><br>
-        <input type="text" required onkeypress="return isNumberKey(this, event)"  id="salePriceWithVat" name="salePriceWithVat"><br><br>
+        <input type="text" required onkeypress="return isNumberKey(this, event)" onkeyup="changeInPriceWithVatRate(this.id)" id="salePriceWithVat" name="salePriceWithVat"><br><br>
 
         <label for="warehouseId">Select Warehouse</label><br>
         <select  style="background:#d5e1df; border:outset 2px #e4e4e4" id="warehouseId" name="warehouseId"></select><br><br>
 
         <input style="background:#d5e1df" type="submit" value="Add" onClick="postProducts()">
     </form>
+    </div>
     </div>
 
 </div>
@@ -78,7 +90,9 @@
         var element = document.getElementById(elementID);
         if (element.style.display === "none") {
             $('table').hide();
-            $('form').hide();
+            $('#warehouseForm').hide();
+            $('#productsDiv').hide();
+
             element.style.display = "block";
         } else {
             element.style.display = "none";

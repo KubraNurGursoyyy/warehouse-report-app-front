@@ -46,6 +46,7 @@ async function postProductsApi(url) {
 
 function postProducts(){
     console.log("Form:", $("#productForm"));
+    console.log("All:", $("#allProductForm"));
 
     $("#productForm").submit(function() {
         console.log("Submit", $(this).formToJson());
