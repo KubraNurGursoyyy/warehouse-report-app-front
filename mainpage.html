@@ -88,6 +88,11 @@
 <script>
     function display(elementID) {
         var element = document.getElementById(elementID);
+        $('#warehouseForm')[0].reset();
+        $('#productForm')[0].reset();
+
+        console.log($('#warehouseForm'));
+        console.log($("form")[0])
         if (element.style.display === "none") {
             $('table').hide();
             $('#warehouseForm').hide();
@@ -97,6 +102,7 @@
         } else {
             element.style.display = "none";
         }
+
     }
     function isNumberKey(txt, evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
