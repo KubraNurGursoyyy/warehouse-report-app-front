@@ -44,12 +44,37 @@
     <div style="font-size: 15px">
         <div id="reportDiv">
             <table style="background: white" class="table table-hover" id="reportTable"></table>
-
         </div>
         <div id="productsListDiv" style="display: none">
-            <label for="warehousename">Select Warehouse If You Want To Filter</label><br>
-            <select  style="background:#d5e1df; border:outset 2px #e4e4e4" id="warehousename" name="warehousename"></select><br><br>
-            <input style="background:#d5e1df" type="submit" value="Add" onClick="filterByWarehouse();"><br><br>
+            <div id="filterDiv" style="display: flex;">
+                <div style="margin-right: 40px;">
+                    <label for="warehousename">Select Warehouse You Want To Filter</label><br>
+                    <select  style="background:#d5e1df; border:outset 2px #e4e4e4" id="warehousename" name="warehousename"></select><br><br>
+                    <input style="background:#d5e1df" type="submit" value="Filter" id ="filterbywarehouse" onClick="filterByWarehouse(); displayRemoveButton();"><br><br>
+                </div>
+
+                <div style="margin-right: 40px;">
+                    <label for="pricetype">Select Price Type You Want To Filter</label><br>
+                    <select  style="background:#d5e1df; border:outset 2px #e4e4e4" id="pricetype" name="pricetype">
+                        <option selected value = 1>Purchase Price</option>
+                        <option value = 2>Purchase Price With Vat</option>
+                        <option value = 3>Sale Price</option>
+                        <option value = 4>Sale Price With Vat</option>
+                    </select><br><br>
+                    <input type="number" required onkeypress="return isNumberKey(this, event)" id="startPrice" name="startPrice" placeholder="Start Price" onkeyup="conditionsForEndPrice()"><br><br>
+                    <input type="number" required onkeypress="return isNumberKey(this, event)" id="endPrice" name="endPrice" placeholder="End Price"><br><br>
+                    <input style="background:#d5e1df" type="submit" value="Filter" id ="filterbyprice" onClick="filterByPrice(); displayRemoveButton()"><br><br>
+                </div>
+
+                <div style="margin-right: 40px;">
+                    <label for="warehousename">Type Letter For Product You Want To Filter</label><br>
+                    <input type="text" id="filterbyname" placeholder="Type Here" onkeyup="filterByLetters(this.value)"><br><br>
+                </div>
+
+                <input style="height: fit-content;background:#d5e1df; display: none" id="removeFilterButton" type="submit" value="Remove Filter" onClick="getProductsApi();hideRemoveButton()"><br><br>
+
+            </div>
+
             <table style="background: white" class="table table-hover" id="productsTable"></table>
 
         </div>
@@ -100,6 +125,15 @@
 </div>
 </body>
 <script>
+    function displayRemoveButton(){
+        var removeButton = document.getElementById("removeFilterButton");
+        removeButton.style.display="block"
+    }
+    function hideRemoveButton(){
+        var removeButton = document.getElementById("removeFilterButton");
+        removeButton.style.display="none"
+    }
+
     function display(elementID) {
         var element = document.getElementById(elementID);
         $('#warehouseForm')[0].reset();

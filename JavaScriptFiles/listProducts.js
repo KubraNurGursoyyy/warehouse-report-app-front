@@ -3,6 +3,13 @@ let products;
 const api_list_by_warehouse =
     "https://warehouse-report-app-backend.herokuapp.com/api/products/warehouse/";
 
+const api_list_by_letters =
+    "https://warehouse-report-app-backend.herokuapp.com/api/products/name/";
+
+const api_list_by_price =
+    "https://warehouse-report-app-backend.herokuapp.com/api/products/price/";
+
+
 async function getProductsApi() {
     const response = await fetch(api_post_products_url);
     var data = await response.json();
@@ -76,4 +83,55 @@ async function getFilterByWarehouse(warehouseID) {
 function filterByWarehouse() {
     var selectedWarehouseID = document.getElementById('warehousename').value;
     getFilterByWarehouse(selectedWarehouseID);
+}
+
+async function getFilterByPrice(pricetype, startprice,endprice) {
+    var url = api_list_by_price +pricetype+ "/" +startprice+ "/" + endprice;
+    console.log("Url " , url);
+    const response = await fetch(url);
+    var filteredbypricedata = await response.json();
+    console.log("filteredbypricedata : ", filteredbypricedata);
+    renderProducts(filteredbypricedata);
+
+}
+
+function filterByPrice(){
+    var selectedPriceType = document.getElementById("pricetype").value;
+    var startPrice = document.getElementById("startPrice").value;
+    var endPrice = document.getElementById("endPrice").value;
+
+    if(endPrice > startPrice){
+        getFilterByPrice(selectedPriceType,startPrice,endPrice);
+        document.getElementById("pricetype").value = 1;
+        document.getElementById("startPrice").value = "";
+        document.getElementById("endPrice").value = "";
+    }
+    else{
+        alert("Please enter a value less than start price for end price")
+    }
+
+
+
+
+}
+
+
+function conditionsForEndPrice(){
+    var startPriceVal = document.getElementById("startPrice").value;
+    var endPriceInput = document.getElementById("endPrice");
+    endPriceInput.style.background = 'rgba(227,227,227)';
+    endPriceInput.value = startPriceVal;
+}
+
+async function getFilterByLetters(value){
+    var response = await fetch(api_list_by_letters+value);
+    console.log(api_list_by_letters+value);
+    var filtereddatabyletters = await response.json();
+    renderProducts(filtereddatabyletters);
+
+}
+
+function filterByLetters(value){
+    console.log(value);
+    getFilterByLetters(value);
 }
