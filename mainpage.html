@@ -32,9 +32,9 @@
     <h3>Select Action</h3>
     <br>
     <div >
-    <button style="background:#d5e1df" id="makeReportButton" type="button" onclick="display('reportDiv'); getapi()"><h3>Make Report</h3></button>
-    <button style="background:#d5e1df" type="button" onclick="display('warehouseForm')"><h3>Add Warehouse</h3></button>
-    <button style="background:#d5e1df" type="button" onclick="display('productsDiv'); getWarehousesApi(); getVatRate()"><h3>Add Product</h3></button>
+    <button style="background:#d5e1df" id="makeReportButton" type="button" onclick="display('reportDiv'); getapi(); hideRemoveButton()"><h3>Make Report</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('warehouseForm'); hideRemoveButton()"><h3>Add Warehouse</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('productsDiv'); getWarehousesApi(); getVatRate(); hideRemoveButton()"><h3>Add Product</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('productsListDiv'); getProductsApi(); getOptWarehouses()"><h3>List Products</h3></button>
     </div>
     <br>
