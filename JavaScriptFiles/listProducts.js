@@ -100,7 +100,11 @@ function filterByPrice(){
     var startPrice = document.getElementById("startPrice").value;
     var endPrice = document.getElementById("endPrice").value;
 
-    if(endPrice > startPrice){
+    console.log(selectedPriceType,startPrice,endPrice);
+
+    console.log(parseInt(endPrice) > parseInt(startPrice))
+
+    if(parseInt(endPrice) > parseInt(startPrice)){
         getFilterByPrice(selectedPriceType,startPrice,endPrice);
         document.getElementById("pricetype").value = 1;
         document.getElementById("startPrice").value = "";

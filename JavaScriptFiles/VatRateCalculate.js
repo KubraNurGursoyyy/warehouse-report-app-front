@@ -1,21 +1,10 @@
 let vatRate;
 
 function getVatRate(){
-    console.log("VatRate:", $("#vatRate")[0].value);
     vatRate = $("#vatRate")[0].value;
-    console.log("Vat Rate Value" , vatRate)
-    console.log("Formdaki inputlar?", document.getElementById('productForm').getElementsByTagName('input'));
     var inputs = document.getElementById('productForm').getElementsByTagName('input');
-    console.log("Inputs:", inputs);
     for(let i = 0; i <= 6; i++){
-        console.log("Inputs i :", inputs[i], inputs[i].id, i);
-
-        console.log("Inputs i background :", inputs[i].style.background);
-
         if(inputs[i].style.background.includes("rgb(227, 227, 227) none repeat scroll 0% 0%") || inputs[i].style.background.includes("rgb(227, 227, 227)")){
-
-            console.log("Inputs i :", inputs[i], inputs[i].id, i);
-
             if(inputs[i].id.includes("WithVat")){
                 var inputPrice = inputs[i - 1].value;
                 document.getElementById(inputs[i].id).value = findPriceWithVatRateFromPrice(inputPrice);

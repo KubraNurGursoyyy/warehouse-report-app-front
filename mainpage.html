@@ -61,8 +61,8 @@
                         <option value = 3>Sale Price</option>
                         <option value = 4>Sale Price With Vat</option>
                     </select><br><br>
-                    <input type="number" required onkeypress="return isNumberKey(this, event)" id="startPrice" name="startPrice" placeholder="Start Price" onkeyup="conditionsForEndPrice()"><br><br>
-                    <input type="number" required onkeypress="return isNumberKey(this, event)" id="endPrice" name="endPrice" placeholder="End Price"><br><br>
+                    <input type="number" min="0" required onkeypress="return isNumberKey(this, event)" id="startPrice" name="startPrice" placeholder="Start Price" onkeyup="conditionsForEndPrice()"><br><br>
+                    <input type="number" min ="2" required onkeypress="return isNumberKey(this, event)" id="endPrice" name="endPrice" placeholder="End Price"><br><br>
                     <input style="background:#d5e1df" type="submit" value="Filter" id ="filterbyprice" onClick="filterByPrice(); displayRemoveButton()"><br><br>
                 </div>
 
