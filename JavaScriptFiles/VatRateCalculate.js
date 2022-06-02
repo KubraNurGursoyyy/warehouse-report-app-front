@@ -29,7 +29,8 @@ function changeInPrice(event){
 }
 
 function findVatRate(price,priceWithVat){
-    var FindingVat = ((priceWithVat - price) * 100) / price;
+
+    var FindingVat = ((priceWithVat * 100) / price) - 100;
     return FindingVat;
 }
 
