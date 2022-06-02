@@ -10,7 +10,9 @@ function getVatRate(){
     for(let i = 0; i <= 6; i++){
         console.log("Inputs i :", inputs[i], inputs[i].id, i);
 
-        if(inputs[i].style.background.includes("rgb(227, 227, 227) none repeat scroll 0% 0%")){
+        console.log("Inputs i background :", inputs[i].style.background);
+
+        if(inputs[i].style.background.includes("rgb(227, 227, 227) none repeat scroll 0% 0%") || inputs[i].style.background.includes("rgb(227, 227, 227)")){
 
             console.log("Inputs i :", inputs[i], inputs[i].id, i);
 
