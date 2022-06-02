@@ -66,8 +66,8 @@
                 </div>
 
                 <div style="margin-right: 40px;">
-                    <label for="warehousename">Type Letter For Product You Want To Filter</label><br>
-                    <input type="text" id="filterbyname" placeholder="Type Here" onkeyup="filterByLetters(this.value)"><br><br>
+                    <label for="warehousename">Type Character For Product You Want To Filter</label><br>
+                    <input type="text" id="filterbyname" placeholder="Type Here" onkeyup="filterByLetters(this.value); displayRemoveButton();"><br><br>
                 </div>
 
                 <input style="height: fit-content;background:#d5e1df; display: none" id="removeFilterButton" type="submit" value="Remove Filter" onClick="getProductsApi();hideRemoveButton()"><br><br>
@@ -130,7 +130,8 @@
     }
     function hideRemoveButton(){
         var removeButton = document.getElementById("removeFilterButton");
-        removeButton.style.display="none"
+        removeButton.style.display="none";
+        document.getElementById("filterbyname").value = "";
     }
 
     function display(elementID) {
@@ -151,6 +152,9 @@
 
         document.getElementById('purchasePriceWithVat').value =  "";
         document.getElementById('purchasePriceWithVat').style.background =  'rgb(255, 255, 255)';
+
+        document.getElementById("filterbyname").value = "";
+
 
         $('#productForm')[0].reset();
         $('#productForm')[0].reset();

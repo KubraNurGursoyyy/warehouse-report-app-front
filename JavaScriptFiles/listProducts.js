@@ -128,9 +128,17 @@ function conditionsForEndPrice(){
 }
 
 async function getFilterByLetters(value){
-    var response = await fetch(api_list_by_letters+value);
+    /*var response = await fetch(api_list_by_letters+value);
     console.log(api_list_by_letters+value);
-    var filtereddatabyletters = await response.json();
+    var filtereddatabyletters = await response.json();*/
+    var filtereddatabyletters = [];
+    console.log("Length ",products.length);
+    for(var i = 0; i < products.length;i++){
+        console.log(products[i].products);
+        if((products[i].products.toLowerCase().indexOf(value.toLowerCase()) !== -1)){
+            filtereddatabyletters.push(products[i]);
+        }
+    }
     renderProducts(filtereddatabyletters);
 
 }
