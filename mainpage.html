@@ -15,10 +15,14 @@
     <script src="./JSDirectory/formToJson.js"></script>
     <script src="./JSDirectory/formToJson.min.js"></script>
 
+    <script src="JavaScriptFiles/apiConnection.js"></script>
+    <script src="JavaScriptFiles/formData.js"></script>
+
+
     <script src="./JavaScriptFiles/makeReport.js"></script>
     <script src="./JavaScriptFiles/addWarehouse.js"></script>
     <script src="./JavaScriptFiles/addProducts.js"></script>
-    <script src="./JavaScriptFiles/VatRateCalculate.js"></script>
+    <script src="JavaScriptFiles/vatRateCalculate.js"></script>
     <script src="./JavaScriptFiles/listProducts.js"></script>
 
 
@@ -32,10 +36,10 @@
     <h3>Select Action</h3>
     <br>
     <div >
-    <button style="background:#d5e1df" id="makeReportButton" type="button" onclick="display('reportDiv'); getapi(); hideRemoveButton()"><h3>Make Report</h3></button>
+    <button style="background:#d5e1df" id="makeReportButton" type="button" onclick="display('reportDiv'); makeReport(); hideRemoveButton()"><h3>Make Report</h3></button>
     <button style="background:#d5e1df" type="button" onclick="display('warehouseForm'); hideRemoveButton()"><h3>Add Warehouse</h3></button>
-    <button style="background:#d5e1df" type="button" onclick="display('productsDiv'); getWarehousesApi(); getVatRate(); hideRemoveButton()"><h3>Add Product</h3></button>
-    <button style="background:#d5e1df" type="button" onclick="display('productsListDiv'); getProductsApi(); getOptWarehouses()"><h3>List Products</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('productsDiv'); getWarehouses(); getVatRate(); hideRemoveButton()"><h3>Add Product</h3></button>
+    <button style="background:#d5e1df" type="button" onclick="display('productsListDiv'); getProducts(); getOptWarehouses()"><h3>List Products</h3></button>
     </div>
     <br>
     <br>
@@ -70,7 +74,7 @@
                     <input type="text" id="filterbyname" placeholder="Type Here" onkeyup="filterByLetters(this.value); displayRemoveButton();"><br><br>
                 </div>
 
-                <input style="height: fit-content;background:#d5e1df; display: none" id="removeFilterButton" type="submit" value="Remove Filter" onClick="getProductsApi();hideRemoveButton()"><br><br>
+                <input style="height: fit-content;background:#d5e1df; display: none" id="removeFilterButton" type="submit" value="Remove Filter" onClick="getProducts();hideRemoveButton()"><br><br>
 
             </div>
 
@@ -189,8 +193,8 @@
     }
     function goToMakeReport(){
         document.getElementById('makeReportButton').click();
-        getapi();
-        getProductsApi();
+        makeReport();
+        getProducts();
         }
 </script>
 </html>

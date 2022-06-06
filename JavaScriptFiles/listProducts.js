@@ -1,39 +1,57 @@
 let products;
 
-const api_list_by_warehouse =
-    "https://warehouse-report-app-backend.herokuapp.com/api/products/warehouse/";
 
-const api_list_by_letters =
-    "https://warehouse-report-app-backend.herokuapp.com/api/products/name/";
-
-const api_list_by_price =
-    "https://warehouse-report-app-backend.herokuapp.com/api/products/price/";
-
-
-async function getProductsApi() {
-    const response = await fetch(api_post_products_url);
-    var data = await response.json();
-    products = data;
-    renderProducts(data);
+function getProducts(){
+    products = getApi(api_products_url);
+    renderProducts(products);
 }
-
-function renderProducts(data) {
-    let tab =
-        `<tr>
+function renderProductsWithArray(data) {
+        let tab =
+            `<tr>
 		<th>Product Name</th>
 		<th>Quantity</th>
 		<th>Purchase Price</th>
 		<th>Sale Price</th>
 		
 		<th>Vat Rate For Product</th>
-
 		
 		<th>Purchase Price With VAT</th>
 		<th>Sale Price With VAT</th>
 		</tr>`;
-    data.forEach(r => {
-        var vatrate = findVatRate(r.purchasePrice, r.purchasePriceWithVat);
-        tab += `<tr>
+        data.forEach(r => {
+            var vatrate = findVatRate(r.purchasePrice, r.purchasePriceWithVat);
+            tab += `<tr>
+       <td>${r.products} </td>
+       <td>${r.quantity}</td>
+       <td>${r.purchasePrice}</td>
+       <td>${r.salePrice}</td>
+       
+       <td>${vatrate}</td>	
+
+       <td>${r.purchasePriceWithVat}</td>
+       <td>${r.salePriceWithVat}</td>
+   </tr>`;
+        });
+        document.getElementById("productsTable").innerHTML = tab;
+}
+
+function renderProducts(data) {
+    data.then((data) => {
+        let tab =
+            `<tr>
+		<th>Product Name</th>
+		<th>Quantity</th>
+		<th>Purchase Price</th>
+		<th>Sale Price</th>
+		
+		<th>Vat Rate For Product</th>
+		
+		<th>Purchase Price With VAT</th>
+		<th>Sale Price With VAT</th>
+		</tr>`;
+        data.forEach(r => {
+            var vatrate = findVatRate(r.purchasePrice, r.purchasePriceWithVat);
+            tab += `<tr>
        <td>${r.products} </td>
        <td>${r.quantity}</td>
        <td>${r.purchasePrice}</td>
@@ -46,52 +64,33 @@ function renderProducts(data) {
        <td>${r.purchasePriceWithVat}</td>
        <td>${r.salePriceWithVat}</td>
    </tr>`;
+        });
+        document.getElementById("productsTable").innerHTML = tab;
     });
-    document.getElementById("productsTable").innerHTML = tab;
 }
 
 async function getOptWarehouses() {
-
-    const response = await fetch(api_post_url);
-    var wfdata = await response.json();
-    console.log("Wdata : ", wfdata);
+    var wfdata = getApi(api_warehouses_url);
     renderFW(wfdata);
 }
 
 function renderFW(wfdata) {
-    let tab =``;
-    for(let r = 0; r < wfdata.length; r++){
-        if(r === 0)
-            tab += `<option value="${wfdata[r].id}" selected>${wfdata[r].name}</option>`;
-        else
-            tab += `<option value="${wfdata[r].id}">${wfdata[r].name}</option>`;
-
-    }
-    document.getElementById("warehousename").innerHTML = tab;
-}
-
-
-async function getFilterByWarehouse(warehouseID) {
-    console.log(api_list_by_warehouse+warehouseID)
-    const response = await fetch(api_list_by_warehouse+warehouseID);
-    var filtereddata = await response.json();
-    console.log("filtereddata : ", filtereddata);
-    renderProducts(filtereddata);
-
+    wfdata.then((wfdata) => {
+        let tab =``;
+        for(let r = 0; r < wfdata.length; r++){
+            if(r === 0)
+                tab += `<option value="${wfdata[r].id}" selected>${wfdata[r].name}</option>`;
+            else
+                tab += `<option value="${wfdata[r].id}">${wfdata[r].name}</option>`;
+        }
+        document.getElementById("warehousename").innerHTML = tab;
+    });
 }
 
 function filterByWarehouse() {
     var selectedWarehouseID = document.getElementById('warehousename').value;
-    getFilterByWarehouse(selectedWarehouseID);
-}
-
-async function getFilterByPrice(pricetype, startprice,endprice) {
-    var url = api_list_by_price +pricetype+ "/" +startprice+ "/" + endprice;
-    console.log("Url " , url);
-    const response = await fetch(url);
-    var filteredbypricedata = await response.json();
-    console.log("filteredbypricedata : ", filteredbypricedata);
-    renderProducts(filteredbypricedata);
+    var filtereddata = getApi(api_list_by_warehouse + selectedWarehouseID);
+    renderProducts(filtereddata);
 
 }
 
@@ -100,12 +99,10 @@ function filterByPrice(){
     var startPrice = document.getElementById("startPrice").value;
     var endPrice = document.getElementById("endPrice").value;
 
-    console.log(selectedPriceType,startPrice,endPrice);
-
-    console.log(parseInt(endPrice) > parseInt(startPrice))
-
     if(parseInt(endPrice) > parseInt(startPrice)){
-        getFilterByPrice(selectedPriceType,startPrice,endPrice);
+        var url = api_list_by_price +selectedPriceType+ "/" +startPrice+ "/" + endPrice;
+        renderProducts(getApi(url));
+
         document.getElementById("pricetype").value = 1;
         document.getElementById("startPrice").value = "";
         document.getElementById("endPrice").value = "";
@@ -113,9 +110,6 @@ function filterByPrice(){
     else{
         alert("Please enter a value less than start price for end price")
     }
-
-
-
 
 }
 
@@ -128,10 +122,9 @@ function conditionsForEndPrice(){
 }
 
 async function getFilterByLetters(value){
-    /*var response = await fetch(api_list_by_letters+value);
-    console.log(api_list_by_letters+value);
-    var filtereddatabyletters = await response.json();*/
+
     var filtereddatabyletters = [];
+    products.then((products) => {
     console.log("Length ",products.length);
     for(var i = 0; i < products.length;i++){
         console.log(products[i].products);
@@ -139,7 +132,8 @@ async function getFilterByLetters(value){
             filtereddatabyletters.push(products[i]);
         }
     }
-    renderProducts(filtereddatabyletters);
+    renderProductsWithArray(filtereddatabyletters);
+    });
 
 }
 

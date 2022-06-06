@@ -1,62 +1,34 @@
-const api_post_products_url =
-    "https://warehouse-report-app-backend.herokuapp.com/api/products/";
 
-let _wdata;
-let warehouses;
-async function getWarehousesApi() {
-
-    const response = await fetch(api_post_url);
-    var data = await response.json();
-    warehouses = data;
-
-    console.log("Warehouses", warehouses);
-    render(data);
+function getWarehouses(){
+    renderWarehouses(getApi(api_warehouses_url));
 }
 
-function render(data) {
-    console.log("Data: " ,data);
-    let tab =``;
-    for(let r = 0; r < data.length; r++){
-        if(r === 0)
-            tab += `<option value="${data[r].id}" selected>${data[r].name}</option>`;
-        else
-            tab += `<option value="${data[r].id}">${data[r].name}</option>`;
-
-    }
-    console.log(tab)
-    document.getElementById("warehouseId").innerHTML = tab;
+function renderWarehouses(data) {
+    data.then((data) => {
+        let tab =``;
+        for(let r = 0; r < data.length; r++){
+            if(r === 0)
+                tab += `<option value="${data[r].id}" selected>${data[r].name}</option>`;
+            else
+                tab += `<option value="${data[r].id}">${data[r].name}</option>`;
+        }
+        document.getElementById("warehouseId").innerHTML = tab;
+    });
 }
-
-
-async function postProductsApi(url) {
-    let options = {
-        method: "POST",
-        body: _wdata,
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            "Access-Control-Allow-Origin": "https://warehouse-report-app-backend.herokuapp.com/api/products/"
-        }};
-    console.log("options:", options);
-    console.log("body:" , options.body);
-    const response = await fetch(url,options)
-    alert("Product Added");
-    $("#productForm")[0].reset();
-
-
-}
-
 
 function postProducts(){
-    console.log("Form:", $("#productForm"));
-
     $("#productForm").submit(function() {
-        console.log("Submit", $(this).formToJson());
         return false;
     });
+    var _pdata = JSON.stringify($("#productForm").formToJson())
+    var response = postApi(api_products_url,_pdata);
+    response.then((response) =>{
+        if(response === true){
+            alert("Product Added");
+            $("#productForm")[0].reset();
+        }
+    });
 
-    _wdata = JSON.stringify($("#productForm").formToJson())
-    console.log("_data nın json hali ", JSON.stringify($("#productForm").formToJson()))
 
-    postProductsApi(api_post_products_url);
 }
 
